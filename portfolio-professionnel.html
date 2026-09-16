@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>Portfolio — À personnaliser</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#fff;
+  --text:#21181c;
+  --muted:#786d72;
+  --line:#eee5e8;
+  --pink:#ed7f9d;
+  --pink-dark:#d95f82;
+  --pink-soft:#fff1f5;
+  --shadow:0 22px 70px rgba(91,45,59,.10);
+  --radius:24px;
+  --max:1160px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  background:var(--bg);
+  font-family:"DM Sans",sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+::selection{background:#ffdce7;color:var(--text)}
+
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1}
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(34px);
+  opacity:.43;
+  will-change:transform;
+}
+.blob.one{width:250px;height:250px;background:#f7aec1;left:-90px;top:8%;animation:driftOne 17s ease-in-out infinite}
+.blob.two{width:310px;height:310px;background:#f4c1d0;right:-125px;top:38%;animation:driftTwo 21s ease-in-out infinite}
+.blob.three{width:220px;height:220px;background:#f8a7bc;left:30%;bottom:-100px;opacity:.25;animation:driftThree 19s ease-in-out infinite}
+@keyframes driftOne{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(42px,24px,0) scale(1.07)}
+}
+@keyframes driftTwo{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-35px,-25px,0) scale(.94)}
+}
+@keyframes driftThree{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(25px,-35px,0)}
+}
+
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  border-bottom:1px solid rgba(238,229,232,.78);
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(20px);
+}
+.header-inner{
+  max-width:var(--max);
+  margin:auto;
+  min-height:76px;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+.logo-mark{
+  width:30px;height:30px;border-radius:10px;
+  background:var(--text);
+  position:relative;
+  overflow:hidden;
+}
+.logo-mark:after{
+  content:"";
+  position:absolute;
+  width:19px;height:19px;
+  background:var(--pink);
+  border-radius:50%;
+  right:-3px;bottom:-3px;
+}
+.nav{display:flex;align-items:center;gap:30px;color:#655a5f;font-size:14px}
+.nav a{position:relative;transition:color .25s ease}
+.nav a:after{
+  content:"";
+  position:absolute;left:0;right:0;bottom:-7px;height:1.5px;
+  background:var(--pink-dark);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform .25s ease;
+}
+.nav a:hover{color:var(--text)}
+.nav a:hover:after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:8px}
+.btn{
+  border:0;border-radius:999px;padding:11px 17px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-weight:700;font-size:13px;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--text);color:#fff;box-shadow:0 8px 25px rgba(33,24,28,.13)}
+.btn-soft{background:var(--pink-soft);color:var(--pink-dark)}
+.icon-btn{
+  width:42px;height:42px;border:1px solid var(--line);
+  background:#fff;border-radius:50%;display:grid;place-items:center;
+}
+.menu{display:none}
+
+main{max-width:var(--max);margin:auto;padding:0 28px}
+.hero{
+  min-height:calc(100vh - 76px);
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+  align-items:center;
+  gap:70px;
+  padding:85px 0 110px;
+}
+.hero-copy{animation:rise .9s cubic-bezier(.2,.75,.2,1) both}
+.eyebrow{
+  margin:0 0 18px;
+  color:var(--pink-dark);
+  text-transform:uppercase;
+  letter-spacing:.19em;
+  font-size:11px;
+  font-weight:800;
+}
+.hero h1{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(48px,7vw,86px);
+  line-height:.96;
+  letter-spacing:-.075em;
+  margin:0;
+  max-width:800px;
+}
+.hero h1 span{color:var(--pink-dark)}
+.hero-sub{
+  color:var(--muted);
+  max-width:610px;
+  font-size:18px;
+  line-height:1.7;
+  margin:28px 0 30px;
+}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-note{
+  margin-top:20px;color:#a1969b;font-size:12px;
+}
+.hero-visual{
+  min-height:410px;
+  border:1px solid var(--line);
+  border-radius:38px;
+  background:rgba(255,255,255,.72);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  animation:floatCard 7s ease-in-out infinite;
+}
+.visual-orb{
+  width:210px;height:210px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ffd8e3 0,#f4a4bb 46%,#df708f 100%);
+  filter:blur(.2px);
+  box-shadow:0 30px 70px rgba(218,95,130,.22);
+}
+.visual-ring{
+  position:absolute;
+  width:300px;height:300px;border:1px solid #efcbd5;border-radius:50%;
+  animation:slowSpin 18s linear infinite;
+}
+.visual-label{
+  position:absolute;bottom:26px;left:28px;
+  font-family:"Manrope",sans-serif;font-weight:700;font-size:13px;
+  color:#6e6267;
+}
+@keyframes rise{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes slowSpin{to{transform:rotate(360deg)}}
+
+.section{
+  padding:105px 0;
+  border-top:1px solid var(--line);
+}
+.section-head{
+  display:flex;justify-content:space-between;gap:30px;align-items:end;
+  margin-bottom:42px;
+}
+.section-title{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(34px,5vw,54px);
+  line-height:1;
+  letter-spacing:-.06em;
+  margin:0;
+}
+.section-intro{max-width:450px;color:var(--muted);line-height:1.7;margin:0}
+.empty{
+  border:1px dashed #e8dadd;
+  border-radius:var(--radius);
+  padding:50px 30px;
+  text-align:center;
+  background:rgba(255,250,251,.58);
+}
+.empty strong{font-family:"Manrope",sans-serif;display:block;font-size:19px;margin-bottom:8px}
+.empty span{color:var(--muted);font-size:14px}
+.projects{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:18px;
+}
+.project{
+  min-height:270px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:27px;
+  background:#fff;
+  transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
+}
+.project:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#f0ccd6}
+.project-meta{display:flex;justify-content:space-between;color:var(--pink-dark);font-size:12px;font-weight:700}
+.project h3{font-family:"Manrope",sans-serif;font-size:25px;letter-spacing:-.04em;margin:70px 0 9px}
+.project p{color:var(--muted);line-height:1.65;margin:0}
+.project-link{display:inline-flex;margin-top:20px;color:var(--pink-dark);font-weight:700;font-size:13px}
+
+.timeline{display:flex;flex-direction:column}
+.timeline-item{
+  display:grid;grid-template-columns:150px 1fr;gap:35px;
+  padding:27px 0;border-bottom:1px solid var(--line);
+}
+.timeline-date{color:var(--pink-dark);font-size:13px;font-weight:700}
+.timeline-item h3{margin:0 0 8px;font-family:"Manrope",sans-serif;font-size:21px;letter-spacing:-.03em}
+.timeline-item p{margin:0;color:var(--muted);line-height:1.65}
+
+.skills{display:flex;flex-wrap:wrap;gap:10px}
+.skill{
+  padding:12px 16px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;color:#61565b;font-size:13px;font-weight:600;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease;
+}
+.skill:hover{transform:translateY(-3px);border-color:#efbdca;background:var(--pink-soft)}
+
+.contact{
+  padding:105px 0 80px;
+}
+.contact-box{
+  border-radius:34px;
+  background:var(--text);
+  color:#fff;
+  padding:55px;
+  position:relative;
+  overflow:hidden;
+}
+.contact-box:after{
+  content:"";position:absolute;width:320px;height:320px;border-radius:50%;
+  right:-110px;top:-160px;background:#ed7f9d;filter:blur(35px);opacity:.7;
+}
+.contact-box>*{position:relative;z-index:1}
+.contact-box .eyebrow{color:#f6a7bd}
+.contact-box h2{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(36px,5vw,58px);
+  letter-spacing:-.06em;
+  line-height:1;
+  max-width:700px;
+  margin:0 0 18px;
+}
+.contact-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.contact-item{
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);
+  border-radius:17px;
+  padding:14px 16px;
+  display:flex;flex-direction:column;gap:4px;
+  min-width:180px;
+  backdrop-filter:blur(10px);
+}
+.contact-item small{color:#c8bcc0;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+.contact-item strong{font-size:14px}
+.footer{
+  border-top:1px solid var(--line);
+  padding:25px 0 35px;
+  color:#8b8085;font-size:12px;
+  display:flex;justify-content:space-between;gap:20px;
+}
+
+.editor{
+  display:none;
+  position:fixed;inset:0;z-index:50;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  overflow:auto;
+}
+.editor.active{display:block;animation:editorIn .35s ease both}
+@keyframes editorIn{from{opacity:0}to{opacity:1}}
+.editor-inner{max-width:900px;margin:auto;padding:30px 24px 80px}
+.editor-top{
+  position:sticky;top:0;z-index:2;
+  padding:14px 0;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(15px);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.editor-title{font-family:"Manrope",sans-serif;font-weight:800}
+.editor-actions{display:flex;gap:8px}
+.form-section{
+  margin-top:22px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:24px;
+  background:#fff;
+}
+.form-section h2{font-family:"Manrope",sans-serif;font-size:20px;margin:0 0 18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:700;color:#6d6267}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid var(--line);border-radius:13px;
+  padding:12px 13px;outline:0;background:#fff;color:var(--text);
+  transition:border-color .2s,box-shadow .2s;
+}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:#e99ab0;box-shadow:0 0 0 4px #f9dce5;
+}
+.editor-row{
+  display:flex;justify-content:space-between;align-items:center;gap:15px;
+  margin-bottom:15px;
+}
+.small-note{font-size:12px;color:var(--muted)}
+.item-editor{
+  border:1px solid var(--line);border-radius:17px;padding:16px;margin-top:12px;
+  background:#fffafa;
+}
+.item-editor-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.remove{
+  border:0;background:#fff0f3;color:#c24d6e;border-radius:10px;padding:8px 10px;
+  font-size:12px;font-weight:700;
+}
+.add{
+  border:1px dashed #e2b9c4;background:#fff8fa;color:var(--pink-dark);
+  border-radius:13px;padding:11px 14px;font-size:13px;font-weight:700;margin-top:12px;
+}
+.toast{
+  position:fixed;right:22px;bottom:22px;z-index:100;
+  background:var(--text);color:#fff;border-radius:14px;padding:13px 16px;
+  font-size:13px;box-shadow:var(--shadow);
+  animation:toast .3s ease both;
+}
+@keyframes toast{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:820px){
+  .nav{display:none}
+  .menu{display:grid}
+  .header-inner{padding:0 18px}
+  main{padding:0 18px}
+  .hero{grid-template-columns:1fr;gap:40px;padding:70px 0 85px}
+  .hero-visual{min-height:300px}
+  .projects{grid-template-columns:1fr}
+  .section-head{display:block}
+  .section-intro{margin-top:15px}
+  .contact-box{padding:35px 25px}
+}
+@media(max-width:560px){
+  .header-actions .btn-soft{display:none}
+  .hero h1{font-size:49px}
+  .hero-sub{font-size:16px}
+  .timeline-item{grid-template-columns:1fr;gap:8px}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .contact-item{width:100%}
+  .footer{flex-direction:column}
+  .editor-inner{padding:18px 15px 60px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="ambient" aria-hidden="true">
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+  <div class="blob three"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#accueil"><span class="logo-mark"></span><span id="logoName">Portfolio</span></a>
+    <nav class="nav" id="desktopNav">
+      <a href="#a-propos">À propos</a>
+      <a href="#projets">Projets</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn btn-soft" onclick="openEditor()">Personnaliser</button>
+      <button class="icon-btn menu" onclick="toggleMenu()" aria-label="Ouvrir le menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div id="mobileNav" style="display:none;position:fixed;top:76px;left:0;right:0;z-index:19;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);padding:18px;box-shadow:0 20px 40px rgba(33,24,28,.06)">
+  <a href="#a-propos" onclick="closeMenu()" style="display:block;padding:12px 0">À propos</a>
+  <a href="#projets" onclick="closeMenu()" style="display:block;padding:12px 0">Projets</a>
+  <a href="#parcours" onclick="closeMenu()" style="display:block;padding:12px 0">Parcours</a>
+  <a href="#competences" onclick="closeMenu()" style="display:block;padding:12px 0">Compétences</a>
+  <a href="#contact" onclick="closeMenu()" style="display:block;padding:12px 0">Contact</a>
+  <button class="btn btn-primary" onclick="closeMenu();openEditor()" style="margin-top:8px">Personnaliser le portfolio</button>
+</div>
+
+<main>
+  <section class="hero" id="accueil">
+    <div class="hero-copy">
+      <p class="eyebrow" id="heroEyebrow">PORTFOLIO</p>
+      <h1 id="heroTitle">Ton univers.<br><span>Ton parcours.</span></h1>
+      <p class="hero-sub" id="heroIntro">Présente ici qui tu es, ce que tu crées et ce qui te passionne. Ce portfolio est entièrement personnalisable.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projets">Découvrir mon travail <span>↓</span></a>
+        <button class="btn btn-soft" onclick="openEditor()">Modifier le contenu</button>
+      </div>
+      <div class="hero-note">Aucun compte • Données enregistrées uniquement sur cet appareil</div>
+    </div>
+    <div class="hero-visual">
+      <div class="visual-ring"></div>
+      <div class="visual-orb"></div>
+      <div class="visual-label" id="visualLabel">ESPACE PERSONNEL</div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="a-propos">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">01 — À PROPOS</p>
+        <h2 class="section-title" id="aboutTitle">À propos de moi</h2>
+      </div>
+      <p class="section-intro" id="aboutText">Cette partie est prête à accueillir une présentation personnelle, un parcours, une passion ou quelques mots sur ton univers.</p>
+    </div>
+  </section>
+
+  <section class="section reveal" id="projets">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">02 — PROJETS</p>
+        <h2 class="section-title">Mes projets</h2>
+      </div>
+      <p class="section-intro">Ajoute ici les réalisations, créations, expériences ou travaux que tu souhaites présenter.</p>
+    </div>
+    <div class="projects" id="projectsList"></div>
+  </section>
+
+  <section class="section reveal" id="parcours">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">03 — PARCOURS</p>
+        <h2 class="section-title">Mon parcours</h2>
+      </div>
+      <p class="section-intro">Études, expériences, stages, événements ou étapes importantes : organise ton histoire comme tu le souhaites.</p>
+    </div>
+    <div class="timeline" id="timelineList"></div>
+  </section>
+
+  <section class="section reveal" id="competences">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">04 — COMPÉTENCES</p>
+        <h2 class="section-title">Ce que je sais faire</h2>
+      </div>
+      <p class="section-intro">Une sélection libre de compétences, outils, qualités ou domaines que tu veux mettre en avant.</p>
+    </div>
+    <div class="skills" id="skillsList"></div>
+  </section>
+
+  <section class="contact reveal" id="contact">
+    <div class="contact-box">
+      <p class="eyebrow">05 — CONTACT</p>
+      <h2 id="contactTitle">Parlons de votre prochain projet.</h2>
+      <div class="contact-list" id="contactList"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span id="footerName">Portfolio</span>
+    <span>Créé pour être personnalisé.</span>
+  </footer>
+</main>
+
+<div class="editor" id="editor">
+  <div class="editor-inner">
+    <div class="editor-top">
+      <div class="editor-title">Personnaliser le portfolio</div>
+      <div class="editor-actions">
+        <button class="btn btn-soft" onclick="resetPortfolio()">Réinitialiser</button>
+        <button class="btn btn-primary" onclick="savePortfolio()">Enregistrer</button>
+        <button class="icon-btn" onclick="closeEditor()" aria-label="Fermer">×</button>
+      </div>
+    </div>
+
+    <section class="form-section">
+      <h2>Identité</h2>
+      <div class="form-grid">
+        <div class="field"><label>Nom / prénom</label><input id="fName" placeholder="Ton nom"></div>
+        <div class="field"><label>Petit texte dans le logo</label><input id="fLogo" placeholder="Portfolio"></div>
+        <div class="field full"><label>Accroche</label><input id="fHeadline" placeholder="Une phrase qui te représente"></div>
+        <div class="field full"><label>Présentation courte</label><textarea id="fIntro" placeholder="Présente-toi en quelques lignes"></textarea></div>
+        <div class="field"><label>Titre À propos</label><input id="fAboutTitle" placeholder="À propos de moi"></div>
+        <div class="field"><label>Texte À propos</label><input id="fAboutText" placeholder="Quelques mots sur toi"></div>
+        <div class="field full"><label>Titre du bloc contact</label><input id="fContactTitle" placeholder="Parlons de votre prochain projet."></div>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <div class="editor-row">
+        <div><h2 style="margin-bottom:4px">Projets</h2><div class="small-note">Aucun exemple n'est fourni par défaut.</div></div>
+        <button class="add" onclick="addProject()">+ Ajouter un projet</button>
+      </div>
+      <div id="projectEditors"></div>
+    </section>
+
+    <section class="form-section">
+      <div class="editor-row">
+        <div><h2 style="margin-bottom:4px">Parcours</h2><div class="small-note">Ajoute autant d'étapes que nécessaire.</div></div>
+        <button class="add" onclick="addTimeline()">+ Ajouter une étape</button>
+      </div>
+      <div id="timelineEditors"></div>
+    </section>
+
+    <section class="form-section">
+      <div class="editor-row">
+        <div><h2 style="margin-bottom:4px">Compétences</h2><div class="small-note">Une compétence par ligne.</div></div>
+      </div>
+      <div class="field"><textarea id="fSkills" placeholder="Exemple de format : une compétence par ligne"></textarea></div>
+    </section>
+
+    <section class="form-section">
+      <div class="editor-row">
+        <div><h2 style="margin-bottom:4px">Contacts</h2><div class="small-note">Email, téléphone, LinkedIn ou tout autre contact. Tu peux en ajouter plusieurs avec une description.</div></div>
+        <button class="add" onclick="addContact()">+ Ajouter un contact</button>
+      </div>
+      <div id="contactEditors"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+const emptyPortfolio={
+  name:"",
+  logo:"Portfolio",
+  headline:"",
+  intro:"",
+  aboutTitle:"",
+  aboutText:"",
+  contactTitle:"",
+  projects:[],
+  timeline:[],
+  skills:[],
+  contacts:[]
+};
+
+let data=loadData();
+
+function clone(obj){return JSON.parse(JSON.stringify(obj))}
+function loadData(){
+  try{
+    const saved=localStorage.getItem("professional-portfolio-v2");
+    if(!saved)return clone(emptyPortfolio);
+    const parsed=JSON.parse(saved);
+    return {...clone(emptyPortfolio),...parsed};
+  }catch(e){return clone(emptyPortfolio)}
+}
+function savePortfolio(){
+  collectForm();
+  localStorage.setItem("professional-portfolio-v2",JSON.stringify(data));
+  render();
+  closeEditor();
+  showToast("Portfolio enregistré");
+}
+function collectForm(){
+  data.name=document.getElementById("fName").value.trim();
+  data.logo=document.getElementById("fLogo").value.trim()||"Portfolio";
+  data.headline=document.getElementById("fHeadline").value.trim();
+  data.intro=document.getElementById("fIntro").value.trim();
+  data.aboutTitle=document.getElementById("fAboutTitle").value.trim();
+  data.aboutText=document.getElementById("fAboutText").value.trim();
+  data.contactTitle=document.getElementById("fContactTitle").value.trim();
+  data.skills=document.getElementById("fSkills").value.split("\n").map(x=>x.trim()).filter(Boolean);
+  data.projects=[...document.querySelectorAll("#projectEditors .item-editor")].map(el=>({
+    title:el.querySelector(".p-title").value.trim(),
+    category:el.querySelector(".p-category").value.trim(),
+    year:el.querySelector(".p-year").value.trim(),
+    description:el.querySelector(".p-description").value.trim(),
+    link:el.querySelector(".p-link").value.trim()
+  })).filter(x=>x.title||x.description);
+  data.timeline=[...document.querySelectorAll("#timelineEditors .item-editor")].map(el=>({
+    date:el.querySelector(".t-date").value.trim(),
+    title:el.querySelector(".t-title").value.trim(),
+    description:el.querySelector(".t-description").value.trim()
+  })).filter(x=>x.date||x.title||x.description);
+  data.contacts=[...document.querySelectorAll("#contactEditors .item-editor")].map(el=>({
+    type:el.querySelector(".c-type").value.trim(),
+    value:el.querySelector(".c-value").value.trim(),
+    description:el.querySelector(".c-description").value.trim()
+  })).filter(x=>x.value);
+}
+function populateForm(){
+  document.getElementById("fName").value=data.name||"";
+  document.getElementById("fLogo").value=data.logo||"Portfolio";
+  document.getElementById("fHeadline").value=data.headline||"";
+  document.getElementById("fIntro").value=data.intro||"";
+  document.getElementById("fAboutTitle").value=data.aboutTitle||"";
+  document.getElementById("fAboutText").value=data.aboutText||"";
+  document.getElementById("fContactTitle").value=data.contactTitle||"";
+  document.getElementById("fSkills").value=(data.skills||[]).join("\n");
+  renderEditors();
+}
+function openEditor(){populateForm();document.getElementById("editor").classList.add("active");document.body.style.overflow="hidden"}
+function closeEditor(){document.getElementById("editor").classList.remove("active");document.body.style.overflow=""}
+function resetPortfolio(){
+  if(!confirm("Réinitialiser tout le contenu personnalisé ?"))return;
+  data=clone(emptyPortfolio);
+  localStorage.removeItem("professional-portfolio-v2");
+  populateForm();
+  render();
+  showToast("Portfolio réinitialisé");
+}
+function addProject(){
+  collectForm();
+  data.projects.push({title:"",category:"",year:"",description:"",link:""});
+  renderEditors();
+}
+function addTimeline(){
+  collectForm();
+  data.timeline.push({date:"",title:"",description:""});
+  renderEditors();
+}
+function addContact(){
+  collectForm();
+  data.contacts.push({type:"",value:"",description:""});
+  renderEditors();
+}
+function removeItem(type,index){
+  collectForm();
+  data[type].splice(index,1);
+  renderEditors();
+}
+function renderEditors(){
+  const projects=document.getElementById("projectEditors");
+  projects.innerHTML=data.projects.length?data.projects.map((p,i)=>`
+    <div class="item-editor">
+      <div class="item-editor-top"><strong>Projet ${i+1}</strong><button class="remove" onclick="removeItem('projects',${i})">Supprimer</button></div>
+      <div class="form-grid">
+        <div class="field"><label>Nom du projet</label><input class="p-title" value="${esc(p.title)}" placeholder="Nom"></div>
+        <div class="field"><label>Catégorie</label><input class="p-category" value="${esc(p.category)}" placeholder="Design, développement..."></div>
+        <div class="field"><label>Année</label><input class="p-year" value="${esc(p.year)}" placeholder="2026"></div>
+        <div class="field"><label>Lien</label><input class="p-link" value="${esc(p.link)}" placeholder="https://..."></div>
+        <div class="field full"><label>Description</label><textarea class="p-description" placeholder="Décris ton projet">${esc(p.description)}</textarea></div>
+      </div>
+    </div>`).join(""):`<div class="empty"><strong>Aucun projet</strong><span>Le portfolio reste vide tant que la personne n'ajoute pas son propre contenu.</span></div>`;
+
+  const timeline=document.getElementById("timelineEditors");
+  timeline.innerHTML=data.timeline.length?data.timeline.map((t,i)=>`
+    <div class="item-editor">
+      <div class="item-editor-top"><strong>Étape ${i+1}</strong><button class="remove" onclick="removeItem('timeline',${i})">Supprimer</button></div>
+      <div class="form-grid">
+        <div class="field"><label>Date / période</label><input class="t-date" value="${esc(t.date)}" placeholder="2025 — 2026"></div>
+        <div class="field"><label>Titre</label><input class="t-title" value="${esc(t.title)}" placeholder="Titre de l'étape"></div>
+        <div class="field full"><label>Description</label><textarea class="t-description" placeholder="Décris cette étape">${esc(t.description)}</textarea></div>
+      </div>
+    </div>`).join(""):`<div class="empty"><strong>Aucun élément</strong><span>Ajoute les étapes de ton choix.</span></div>`;
+
+  const contacts=document.getElementById("contactEditors");
+  contacts.innerHTML=data.contacts.length?data.contacts.map((c,i)=>`
+    <div class="item-editor">
+      <div class="item-editor-top"><strong>Contact ${i+1}</strong><button class="remove" onclick="removeItem('contacts',${i})">Supprimer</button></div>
+      <div class="form-grid">
+        <div class="field"><label>Type</label><input class="c-type" value="${esc(c.type)}" placeholder="Email, Téléphone, LinkedIn..."></div>
+        <div class="field"><label>Coordonnée / lien</label><input class="c-value" value="${esc(c.value)}" placeholder="adresse@email.com ou lien"></div>
+        <div class="field full"><label>Description</label><input class="c-description" value="${esc(c.description)}" placeholder="Personnel, professionnel, disponible le soir..."></div>
+      </div>
+    </div>`).join(""):`<div class="empty"><strong>Aucun contact</strong><span>Ajoute seulement les moyens de contact que tu souhaites afficher.</span></div>`;
+}
+function esc(value){
+  return String(value||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function render(){
+  const hasName=Boolean(data.name);
+  document.title=hasName?data.name+" — Portfolio":"Portfolio — À personnaliser";
+  document.getElementById("logoName").textContent=data.logo||"Portfolio";
+  document.getElementById("footerName").textContent=data.name||data.logo||"Portfolio";
+  document.getElementById("heroTitle").innerHTML=data.headline?esc(data.headline).replace(/\n/g,"<br>"):"Ton univers.<br><span>Ton parcours.</span>";
+  document.getElementById("heroIntro").textContent=data.intro||"Présente ici qui tu es, ce que tu crées et ce qui te passionne. Ce portfolio est entièrement personnalisable.";
+  document.getElementById("aboutTitle").textContent=data.aboutTitle||"À propos de moi";
+  document.getElementById("aboutText").textContent=data.aboutText||"Cette partie est prête à accueillir une présentation personnelle, un parcours, une passion ou quelques mots sur ton univers.";
+  document.getElementById("contactTitle").textContent=data.contactTitle||"Parlons de votre prochain projet.";
+  document.getElementById("visualLabel").textContent=(data.name||"ESPACE PERSONNEL").toUpperCase();
+
+  const projects=document.getElementById("projectsList");
+  projects.innerHTML=data.projects.length?data.projects.map((p,i)=>`
+    <article class="project">
+      <div class="project-meta"><span>${esc(p.category)||"PROJET"}</span><span>${esc(p.year)}</span></div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.description)}</p>
+      ${p.link?`<a class="project-link" href="${safeUrl(p.link)}" target="_blank" rel="noopener">Voir le projet ↗</a>`:""}
+    </article>`).join(""):`<div class="empty" style="grid-column:1/-1"><strong>Aucun projet ajouté</strong><span>Utilise « Personnaliser » pour créer tes propres projets.</span></div>`;
+
+  const timeline=document.getElementById("timelineList");
+  timeline.innerHTML=data.timeline.length?data.timeline.map(t=>`
+    <article class="timeline-item"><div class="timeline-date">${esc(t.date)}</div><div><h3>${esc(t.title)}</h3><p>${esc(t.description)}</p></div></article>`).join(""):`<div class="empty"><strong>Aucun parcours ajouté</strong><span>Ajoute uniquement les expériences et étapes qui te correspondent.</span></div>`;
+
+  const skills=document.getElementById("skillsList");
+  skills.innerHTML=data.skills.length?data.skills.map(s=>`<span class="skill">${esc(s)}</span>`).join(""):`<div class="empty" style="width:100%"><strong>Aucune compétence ajoutée</strong><span>Ajoute tes compétences dans l'éditeur.</span></div>`;
+
+  const contacts=document.getElementById("contactList");
+  contacts.innerHTML=data.contacts.length?data.contacts.map(c=>{
+    const value=esc(c.value);
+    const type=(c.type||"Contact").trim();
+    let content=value;
+    if(/^https?:\/\//i.test(c.value)) content=`<a href="${safeUrl(c.value)}" target="_blank" rel="noopener">${value}</a>`;
+    else if(type.toLowerCase().includes("email")||/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.value)) content=`<a href="mailto:${encodeURIComponent(c.value)}">${value}</a>`;
+    else if(type.toLowerCase().includes("téléphone")||type.toLowerCase().includes("telephone")||type.toLowerCase().includes("tel")) content=`<a href="tel:${esc(c.value.replace(/\s/g,""))}">${value}</a>`;
+    return `<div class="contact-item"><small>${esc(type)}</small><strong>${content}</strong>${c.description?`<span style="font-size:11px;color:#b9adb2">${esc(c.description)}</span>`:""}</div>`;
+  }).join(""):`<div class="empty" style="width:100%;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15);color:#fff"><strong style="color:#fff">Aucun contact ajouté</strong><span style="color:#b9adb2">Ajoute ton email, ton téléphone, LinkedIn ou d'autres moyens de contact.</span></div>`;
+}
+function safeUrl(url){
+  try{
+    const u=new URL(url);
+    if(u.protocol==="http:"||u.protocol==="https:")return esc(u.href);
+  }catch(e){}
+  return "#";
+}
+function showToast(text){
+  const old=document.querySelector(".toast");if(old)old.remove();
+  const el=document.createElement("div");el.className="toast";el.textContent=text;document.body.appendChild(el);
+  setTimeout(()=>el.remove(),2300);
+}
+function toggleMenu(){
+  const menu=document.getElementById("mobileNav");
+  menu.style.display=menu.style.display==="block"?"none":"block";
+}
+function closeMenu(){document.getElementById("mobileNav").style.display="none"}
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add("visible")});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&document.getElementById("editor").classList.contains("active"))closeEditor();
+});
+
+render();
+</script>
+</body>
+</html>
